@@ -19,7 +19,7 @@ app.config['ALLOWED_EXTENSIONS'] = {'txt', 'docx', 'pdf'}
 os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
 
 # Configure Blob Storage URL for nltk_data
-BLOB_STORAGE_URL = "https://<YourStorageAccount>.blob.core.windows.net/<YourContainer>/nltk_data.zip"
+BLOB_STORAGE_URL = "https://abhinavportifolio.blob.core.windows.net/twintext/nltk_data.zip"
 NLTK_DATA_PATH = os.path.join(app.root_path, 'static', 'nltk_data')
 nltk.data.path.append(NLTK_DATA_PATH)
 
