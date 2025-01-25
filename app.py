@@ -18,22 +18,8 @@ app.config['UPLOAD_FOLDER'] = 'uploads'
 app.config['ALLOWED_EXTENSIONS'] = {'txt', 'docx', 'pdf'}
 os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
 
-# Configure Blob Storage URL for nltk_data
-BLOB_STORAGE_URL = "https://abhinavportifolio.blob.core.windows.net/twintext/nltk_data.zip"
 NLTK_DATA_PATH = os.path.join(app.root_path, 'static', 'nltk_data')
 nltk.data.path.append(NLTK_DATA_PATH)
-
-# Ensure nltk_data is downloaded and extracted
-def download_nltk_data():
-    if not os.path.exists(NLTK_DATA_PATH):
-        os.makedirs(NLTK_DATA_PATH, exist_ok=True)
-        nltk_zip_path = os.path.join(app.root_path, 'static', 'nltk_data.zip')
-        urllib.request.urlretrieve(BLOB_STORAGE_URL, nltk_zip_path)
-        with zipfile.ZipFile(nltk_zip_path, 'r') as zip_ref:
-            zip_ref.extractall(NLTK_DATA_PATH)
-        os.remove(nltk_zip_path)
-
-download_nltk_data()
 
 # Ensure required NLTK datasets are downloaded
 nltk.download('punkt', download_dir=NLTK_DATA_PATH)
