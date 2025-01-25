@@ -1,6 +1,8 @@
 from flask import Flask, render_template, request
 import nltk
 import os
+import urllib.request
+import zipfile
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 from nltk.stem import PorterStemmer
@@ -16,9 +18,22 @@ app.config['UPLOAD_FOLDER'] = 'uploads'
 app.config['ALLOWED_EXTENSIONS'] = {'txt', 'docx', 'pdf'}
 os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
 
-# Configure NLTK Data Path
+# Configure Blob Storage URL for nltk_data
+BLOB_STORAGE_URL = "https://<YourStorageAccount>.blob.core.windows.net/<YourContainer>/nltk_data.zip"
 NLTK_DATA_PATH = os.path.join(app.root_path, 'static', 'nltk_data')
 nltk.data.path.append(NLTK_DATA_PATH)
+
+# Ensure nltk_data is downloaded and extracted
+def download_nltk_data():
+    if not os.path.exists(NLTK_DATA_PATH):
+        os.makedirs(NLTK_DATA_PATH, exist_ok=True)
+        nltk_zip_path = os.path.join(app.root_path, 'static', 'nltk_data.zip')
+        urllib.request.urlretrieve(BLOB_STORAGE_URL, nltk_zip_path)
+        with zipfile.ZipFile(nltk_zip_path, 'r') as zip_ref:
+            zip_ref.extractall(NLTK_DATA_PATH)
+        os.remove(nltk_zip_path)
+
+download_nltk_data()
 
 # Ensure required NLTK datasets are downloaded
 nltk.download('punkt', download_dir=NLTK_DATA_PATH)
@@ -105,4 +120,4 @@ def index():
     return render_template("index.html", similarity=None, error=None)
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=False)
