@@ -11,6 +11,7 @@ from sklearn.metrics.pairwise import cosine_similarity
 # Ensure required NLTK datasets are downloaded
 nltk.download("punkt")
 nltk.download("stopwords")
+nltk.download('punkt_tab')
 
 # Function to preprocess text
 def preprocess_text(text):
@@ -74,3 +75,6 @@ if file1 and file2:
             st.error("Error reading one or both files.")
     except Exception as e:
         st.error(f"An error occurred: {str(e)}")
+
+
+st.markdown("Developed by [Abhinavtej Reddy](https://abhinavtejreddy.me)")
