@@ -76,6 +76,4 @@ if file1 and file2:
     except Exception as e:
         st.error(f"An error occurred: {str(e)}")
 
-
-st.markdown("Developed by [Abhinavtej Reddy](https://abhinavtejreddy.me)")
 st.write("Made with ❤️ by [Abhinavtej Reddy](https://abhinavtejreddy.me)")
