@@ -78,3 +78,4 @@ if file1 and file2:
 
 
 st.markdown("Developed by [Abhinavtej Reddy](https://abhinavtejreddy.me)")
+st.write("Made with ❤️ by [Abhinavtej Reddy](https://abhinavtejreddy.me)")
