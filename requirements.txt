@@ -1,5 +1,5 @@
-Flask==2.2.2
-nltk==3.7
-scikit-learn==1.0.2
-docx2txt==0.8
-PyPDF2==1.26.0
+streamlit
+nltk
+docx2txt
+pypdf2
+scikit-learn
